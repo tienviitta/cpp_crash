@@ -35,7 +35,17 @@ int main() {
     RE.elem(idx_cc).fill(cx_double(1.0, 1.0)/sqrt(2.0));
     uvec idx_dc = find(RA == 2);
     RE.elem(idx_dc) = data;
-    cout << size(data) << endl << size(idx_dc) << endl << RE << endl;
+    cout << idx_dc << endl << RE << endl;
+
+    // IFFT and FFT
+    // TODO: ifftshift and fftshift?!
+    cx_vec TD = ifft(RE.col(0), 8);
+    cout << TD << endl;
+    cx_vec FD = fft(TD, 8);
+    cout << FD << endl;
+
+    cx_vec RE_sh = shift(RE.col(0), 4); // This is not ifftshift?!
+    cout << RE_sh << endl;
 
     // ...
     return 0;
